@@ -1,5 +1,6 @@
 import jax
 import jax.numpy as jnp
+import pytest
 
 from diff_em.kernels import cross_correlation, simulate_density
 
@@ -151,3 +152,59 @@ def test_cross_correlation_anticorrelated() -> None:
 
     cc = cross_correlation(map_a, map_b)
     assert jnp.allclose(cc, -1.0, atol=1e-5), "Anti-correlated maps must give CC = -1"
+
+
+def test_simulate_density_empty_coords() -> None:
+    """Verify simulate_density handles zero atoms gracefully."""
+    coords = jnp.zeros((0, 3))
+    x = jnp.linspace(0, 10, 5)
+    grid = jnp.stack(jnp.meshgrid(x, x, x, indexing="ij"), axis=-1)
+
+    em_map = simulate_density(coords, grid)
+    assert em_map.shape == (5, 5, 5)
+    assert jnp.all(em_map == 0.0)
+
+
+def test_simulate_density_invalid_sigma() -> None:
+    """Verify simulate_density raises an error for non-positive sigma."""
+    coords = jnp.array([[5.0, 5.0, 5.0]])
+    x = jnp.linspace(0, 10, 5)
+    grid = jnp.stack(jnp.meshgrid(x, x, x, indexing="ij"), axis=-1)
+
+    with pytest.raises(ValueError, match="sigma must be positive"):
+        simulate_density(coords, grid, sigma=0.0)
+
+    with pytest.raises(ValueError, match="sigma must be positive"):
+        simulate_density(coords, grid, sigma=-1.0)
+
+
+def test_cross_correlation_orthogonal() -> None:
+    """Verify CC calculation for orthogonal maps returns 0."""
+    map_a = jnp.zeros((5, 5, 5))
+    map_a = map_a.at[0, 0, 0].set(1.0)
+    map_a = map_a.at[1, 1, 1].set(-1.0)
+
+    map_b = jnp.zeros((5, 5, 5))
+    map_b = map_b.at[4, 4, 4].set(1.0)
+    map_b = map_b.at[3, 3, 3].set(-1.0)
+
+    cc = cross_correlation(map_a, map_b)
+    assert jnp.allclose(cc, 0.0, atol=1e-5)
+
+
+def test_cross_correlation_flat_maps() -> None:
+    """Verify CC handles zero-variance flat maps gracefully."""
+    map_a = jnp.ones((5, 5, 5))
+    map_b = jnp.ones((5, 5, 5))
+
+    cc = cross_correlation(map_a, map_b)
+    assert jnp.allclose(cc, 0.0)
+
+
+def test_cross_correlation_mismatched_shapes() -> None:
+    """Verify CC raises an error for mismatched map shapes."""
+    map_a = jnp.ones((5, 5, 5))
+    map_b = jnp.ones((4, 4, 4))
+
+    with pytest.raises(ValueError, match="Maps must have the same shape"):
+        cross_correlation(map_a, map_b)

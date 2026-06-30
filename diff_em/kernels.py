@@ -24,6 +24,8 @@ def simulate_density(
     Returns:
         3D density map (D, H, W).
     """
+    if sigma <= 0:
+        raise ValueError("sigma must be positive")
 
     def add_atom(density: jnp.ndarray, atom_coord: jnp.ndarray) -> tuple[jnp.ndarray, None]:
         # grid_coords: (D, H, W, 3); atom_coord: (3,)
@@ -53,6 +55,9 @@ def cross_correlation(
     Returns:
         Scalar correlation coefficient in [-1, 1].
     """
+    if map_a.shape != map_b.shape:
+        raise ValueError("Maps must have the same shape")
+
     # Flatten maps
     a = map_a.flatten()
     b = map_b.flatten()

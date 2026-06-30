@@ -68,7 +68,7 @@ diff-em is part of the **differentiable biophysics** ecosystem:
   title   = {diff-em: Differentiable Cryo-EM map fitting in JAX},
   year    = {2026},
   url     = {https://github.com/elkins-lab/diff-em},
-  version = {0.1.1}
+  version = {0.1.2}
 }
 ```
 

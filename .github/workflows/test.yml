@@ -66,6 +66,7 @@ jobs:
                   pip install "jax==${{ matrix.jax-version }}" "jaxlib==${{ matrix.jax-version }}"
                 fi
         pip install -e ".[dev]"
+        pip install pre-commit
 
       shell: bash
 
@@ -81,13 +82,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-huggingface-
 
-    - name: Check typing with mypy
+    - name: Check formatting, typing, and linting with pre-commit
       run: |
-        mypy diff_em/
-
-    - name: Lint with ruff
-      run: |
-        ruff check diff_em/
+        pre-commit run --all-files
 
     - name: Run tests
       run: |
