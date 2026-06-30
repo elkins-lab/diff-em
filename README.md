@@ -1,6 +1,6 @@
 # ❄️ diff-em: Differentiable Cryo-EM Fitting in JAX
 
-[![Tests](https://github.com/elkins/diff-em/actions/workflows/test.yml/badge.svg)](https://github.com/elkins/diff-em/actions/workflows/test.yml)
+[![Tests](https://github.com/elkins-lab/diff-em/actions/workflows/test.yml/badge.svg)](https://github.com/elkins-lab/diff-em/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![JAX](https://img.shields.io/badge/backend-JAX-9cf.svg)](https://github.com/google/jax)
 
@@ -21,7 +21,7 @@
 
 Experience **diff-em** directly in your browser:
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elkins/diff-em/blob/main/examples/interactive_tutorials/cryo_em_fitting_tutorial.ipynb) **Cryo-EM Density Fitting** — Learn how to optimize atomic coordinates directly against 3D density maps using cross-correlation.
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elkins-lab/diff-em/blob/main/examples/interactive_tutorials/cryo_em_fitting_tutorial.ipynb) **Cryo-EM Density Fitting** — Learn how to optimize atomic coordinates directly against 3D density maps using cross-correlation.
 
 ---
 
@@ -54,9 +54,9 @@ Experience **diff-em** directly in your browser:
 
 diff-em is part of the **differentiable biophysics** ecosystem:
 
-- [diff-biophys](https://github.com/elkins/diff-biophys) — Core differentiable biophysics engine.
-- [diff-hdx](https://github.com/elkins/diff-hdx) — Differentiable HDX-MS prediction.
-- [synth-cryo-em](https://github.com/elkins/synth-cryo-em) — Cryo-EM simulation.
+- [diff-biophys](https://github.com/elkins-lab/diff-biophys) — Core differentiable biophysics engine.
+- [diff-hdx](https://github.com/elkins-lab/diff-hdx) — Differentiable HDX-MS prediction.
+- [synth-cryo-em](https://github.com/elkins-lab/synth-cryo-em) — Cryo-EM simulation.
 
 ---
 
@@ -67,8 +67,8 @@ diff-em is part of the **differentiable biophysics** ecosystem:
   author  = {Elkins, George},
   title   = {diff-em: Differentiable Cryo-EM map fitting in JAX},
   year    = {2026},
-  url     = {https://github.com/elkins/diff-em},
-  version = {0.1.0}
+  url     = {https://github.com/elkins-lab/diff-em},
+  version = {0.1.1}
 }
 ```
 
